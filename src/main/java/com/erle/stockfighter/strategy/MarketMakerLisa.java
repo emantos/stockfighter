@@ -51,7 +51,7 @@ public class MarketMakerLisa implements StockFighterStrategy {
 					int startSellPrice = quote.getAsk();
 
 					for (int i = 0; i < positionManager.getBidDepth(); i++) {
-						int bidPrice = startBidPrice + (BET_SPREAD * i);
+						int bidPrice = startBidPrice - (BET_SPREAD * i);
 						Order buyOrder = Order.buy(account, venue, ticker, bidPrice, positionManager.getTranchSize(), OrderType.LIMIT);
 						OrderResponse buyOrderResult = api.order(venue, ticker, buyOrder);
 						if (buyOrderResult.isOk()) {
