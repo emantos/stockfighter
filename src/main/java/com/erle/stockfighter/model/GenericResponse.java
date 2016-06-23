@@ -1,6 +1,6 @@
 package com.erle.stockfighter.model;
 
-public class StopLevelResponse {
+public class GenericResponse {
 	private boolean ok;
 	private String error;
 

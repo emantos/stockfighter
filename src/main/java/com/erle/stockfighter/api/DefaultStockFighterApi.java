@@ -8,7 +8,7 @@ import com.erle.stockfighter.model.Order;
 import com.erle.stockfighter.model.OrderResponse;
 import com.erle.stockfighter.model.Quote;
 import com.erle.stockfighter.model.StartLevelResponse;
-import com.erle.stockfighter.model.StopLevelResponse;
+import com.erle.stockfighter.model.GenericResponse;
 import com.google.gson.Gson;
 
 public class DefaultStockFighterApi implements StockFighterApi {
@@ -38,10 +38,14 @@ public class DefaultStockFighterApi implements StockFighterApi {
     return executeRequest(Api.START_LEVEL, new String[] { levelName }, null, StartLevelResponse.class);
   }
 
-  public StopLevelResponse stopLevel(int instanceId) throws Exception {
-    return executeRequest(Api.STOP_LEVEL, new Object[] { instanceId }, null, StopLevelResponse.class);
+  public GenericResponse stopLevel(int instanceId) throws Exception {
+    return executeRequest(Api.STOP_LEVEL, new Object[] { instanceId }, null, GenericResponse.class);
   }
 
+  public GenericResponse isApiUp() throws Exception {
+	  return executeRequest(Api.API_IS_UP, null, null, GenericResponse.class);
+  }
+  
   public Quote quote(String venue, String stock) throws Exception {
     return executeRequest(Api.QUOTE, new String[] { venue, stock }, null, Quote.class);
   }

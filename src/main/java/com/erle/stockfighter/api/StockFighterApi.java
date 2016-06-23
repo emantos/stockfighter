@@ -4,12 +4,14 @@ import com.erle.stockfighter.model.Order;
 import com.erle.stockfighter.model.OrderResponse;
 import com.erle.stockfighter.model.Quote;
 import com.erle.stockfighter.model.StartLevelResponse;
-import com.erle.stockfighter.model.StopLevelResponse;
+import com.erle.stockfighter.model.GenericResponse;
 
 public interface StockFighterApi {
 	StartLevelResponse startLevel(String levelName) throws Exception;
 	
-	StopLevelResponse stopLevel(int instanceId) throws Exception;
+	GenericResponse stopLevel(int instanceId) throws Exception;
+	
+	GenericResponse isApiUp() throws Exception;
 	
 	Quote quote(String venue, String stock) throws Exception;
 	

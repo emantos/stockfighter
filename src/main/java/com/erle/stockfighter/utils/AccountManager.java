@@ -8,25 +8,29 @@ public class AccountManager {
   private int cash = 0;
 
   public void update(OrderResponse orderResult) {
-    if(orderResult.getDirection().equals("sell")) {
-      inventory -= orderResult.getTotalFilled();
-      if(orderResult.getFills().size() > 0) {
-        for(OrderFill orderFill : orderResult.getFills()) {
-          cash += orderFill.getQty() * orderFill.getPrice();
-        }
-      } else {
-        cash += orderResult.getTotalFilled() * orderResult.getPrice();
-      }
-    } else {
-      inventory += orderResult.getTotalFilled();
-      if(orderResult.getFills().size() > 0) {
-        for(OrderFill orderFill : orderResult.getFills()) {
-          cash -= orderFill.getQty() * orderFill.getPrice();
-        }
-      } else {
-        cash -= orderResult.getTotalFilled() * orderResult.getPrice();
-      }
-    }
+    if (orderResult.isOk()) {
+		if (orderResult.getDirection().equals("sell")) {
+			if (orderResult.getFills().size() > 0) {
+				for (OrderFill orderFill : orderResult.getFills()) {
+					inventory -= orderFill.getQty();
+					cash += orderFill.getQty() * orderFill.getPrice();
+				}
+			} else {
+				inventory -= orderResult.getTotalFilled();
+				cash += orderResult.getTotalFilled() * orderResult.getPrice();
+			}
+		} else {
+			if (orderResult.getFills().size() > 0) {
+				for (OrderFill orderFill : orderResult.getFills()) {
+					inventory += orderFill.getQty();
+					cash -= orderFill.getQty() * orderFill.getPrice();
+				}
+			} else {
+				inventory += orderResult.getTotalFilled();
+				cash -= orderResult.getTotalFilled() * orderResult.getPrice();
+			}
+		} 
+	}
   }
 
   public int totalPosition(int currentPrice) {
