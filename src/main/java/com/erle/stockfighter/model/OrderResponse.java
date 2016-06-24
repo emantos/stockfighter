@@ -2,6 +2,7 @@ package com.erle.stockfighter.model;
 
 import java.util.Collection;
 import java.util.Date;
+import java.util.StringJoiner;
 
 public class OrderResponse {
   private boolean ok;
@@ -135,7 +136,13 @@ public class OrderResponse {
   public String toString() {
     return "OrderResponse [ok=" + ok + ", symbol=" + symbol + ", venue=" + venue + ", direction=" + direction
         + ", originalQty=" + originalQty + ", qty=" + qty + ", price=" + price + ", orderType=" + orderType + ", id="
-        + id + ", account=" + account + ", ts=" + ts + ", fills=" + fills + ", totalFilled=" + totalFilled + ", open="
+        + id + ", account=" + account + ", ts=" + ts + ", fills=" + fillsToString(fills) + ", totalFilled=" + totalFilled + ", open="
         + open + "]";
   }
+
+private String fillsToString(Collection<OrderFill> fills2) {
+	StringJoiner sj = new StringJoiner(":", "[", "]");
+	fills2.stream().forEach(s -> sj.add(s.toString()));
+	return sj.toString();
+}
 }
