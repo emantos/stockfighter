@@ -72,6 +72,11 @@ public class MarketMakerSansa implements StockFighterStrategy {
 		}
 	}
 
+	private Map<Integer, Integer> updateSellStatusAndCancelUnfilled(List<OrderResponse> longSells) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 	private void merge(Map<Integer, Integer> longPositions, Map<Integer, Integer> newPositions) {
 		for(Map.Entry<Integer, Integer> entry :  newPositions.entrySet()) {
 			longPositions.merge(entry.getKey(), entry.getValue(), (Integer a, Integer b) -> { return (a + b); });
